@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue Mastery</title>
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="ESPapp">
+
+
+        <div class="nav-bar"></div>
+        <div class="cart">Cart({{cart}})</div>
+
+        <div class="product-display">
+          <div class="product-container">
+            <div class="product-image">
+              <img v-bind:src="image"  :class="{'out-of-stock-img' : !inStock}" alt="">
+            </div>
+            <div class="product-info">
+              <!-- <a v-bind:href="link">merolink</a> -->
+              <h2>PRODUCT : {{title}}</h2>
+              <!-- <p>Description :
+                <br>
+                 {{description}}</p> -->
+              <p v-if="stockQty >=10">IN STOCK</p>
+              <p v-else-if="stockQty < 10 && stockQty >0" >Few Pieces Left</p>
+              <p v-else >OUT OF STOCK</p>
+                <button class="button"
+                 v-on:click="addToCart" 
+                :disabled="!inStock" 
+                :class="{disabledButton: !inStock}"
+                >Add to Cart</button>
+            
+                <button class="button" @click="removeFromCart">Remove</button>
+              <ul>
+                <li v-for="detail in details">- {{detail}}</li>
+              </ul>
+
+              
+                <div   v-for ="variant in variants"
+                  :key="variant.id" 
+                  @mouseover="updateImage(variant.image)" 
+                  class="color-circle"
+                  v-bind:style="{ backgroundColor: variant.color }"
+                  >
+                </div>
+              
+              <br>
+              <h2>Sizes</h2>
+              <ul>
+                <li v-for="size in sizes">{{size}}</li>
+              </ul>
+
+            </div>
+          </div>
+        
+        </div>
+      </div>
+
+    <!-- Import Js -->
+    <script src="./main.js"></script>
+    <script>
+      const mountedApp = app.mount('#ESPapp')
+    </script>
+
+
+
+
+  </body>
+</html>
