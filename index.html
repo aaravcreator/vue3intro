@@ -18,7 +18,10 @@
         <div class="product-display">
           <div class="product-container">
             <div class="product-image">
+              <div class="img-holder">
+                <p class="ribbon" v-if="onSale">On Sale</p>
               <img v-bind:src="image"  :class="{'out-of-stock-img' : !inStock}" alt="">
+              </div>
             </div>
             <div class="product-info">
               <!-- <a v-bind:href="link">merolink</a> -->
@@ -41,10 +44,12 @@
               </ul>
 
               
-                <div   v-for ="variant in variants"
+                <div   v-for ="variant, index in variants"
                   :key="variant.id" 
-                  @mouseover="updateImage(variant.image)" 
+                  @mouseover="updateVariant(index)" 
+                  @click="updateVariant(index)"
                   class="color-circle"
+                  :class="{'color-circle-selected': selectedVariant == index}"
                   v-bind:style="{ backgroundColor: variant.color }"
                   >
                 </div>

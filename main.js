@@ -6,14 +6,18 @@ const app = Vue.createApp({
             brand: "Levis",
             product : "Socks",
             description:"Officia amet velit anim consectetur do nostrud ipsum adipisicing reprehenderit.",
-            image: "assets/images/socks_blue.jpg",
+            // image: "assets/images/socks_blue.jpg",
+            selectedVariant : 0,
             link: "assets/images/socks_green.jpg",
             inStock :true,
-            stockQty :20,
+            onSale : false,
+            //stockQty :20,
             details : ["Cotton","Soft", "For Teens","Washing Machine Friendly"],
             variants : [
-                {id:123 , color : 'green', image : "assets/images/socks_green.jpg" , qty: 18 },
-                {id:124 , color : 'blue', image : "assets/images/socks_blue.jpg" , qty: 0},
+                {id:123 , color : 'green', image : "assets/images/socks_green.jpg" , qty: 18 , sale: true },
+                {id:124 , color : 'blue', image : "assets/images/socks_blue.jpg" , qty: 0 , sale: true},
+                {id:125 , color : 'white', image : "assets/images/socks_blue.jpg" , qty: 12, sale: false},
+                {id:126 , color : 'yellow', image : "assets/images/socks_green.jpg" , qty: 8, sale: true},
             ],
             sizes : [
                 "XL","XXL","M","S"
@@ -23,14 +27,14 @@ const app = Vue.createApp({
     },
     methods:{
         addToCart(){
-            if(this.stockQty == 0){
+            if(this.variants[this.selectedVariant].qty == 0){
                 this.inStock=false
                 return
             }
             
             this.cart +=1
-            this.stockQty -=1
-            if(this.stockQty == 0){
+            this.variants[this.selectedVariant].qty -=1
+            if(this.variants[this.selectedVariant].qty == 0){
                 this.inStock=false
                 return
             }
@@ -42,21 +46,48 @@ const app = Vue.createApp({
                 return;
             }
             this.cart -=1
-            this.stockQty +=1
-            if(this.stockQty>0)
+            this.variants[this.selectedVariant].qty +=1
+            if(this.variants[this.selectedVariant].qty>0)
             {
                 this.inStock=true
             }
         },
-        updateImage(variantImage){
-            this.image = variantImage
+        updateVariant(index){
+
+            this.selectedVariant = index
+            if(this.variants[this.selectedVariant].qty == 0)
+            {
+                this.inStock= false
+            }
+            else
+            {
+                this.inStock = true
+            }
+            if(this.variants[this.selectedVariant].sale==true)
+            {
+                this.onSale = true
+            }
+            else
+            {
+                this.onSale = false
+            }
+            console.log(this.selectedVariant)
         }
     },
     computed:{
         title ()
         {
             return this.brand + ' - ' + this.product
+        },
+        image()
+        {
+            return this.variants[this.selectedVariant].image
+        },
+        stockQty()
+        {
+            return this.variants[this.selectedVariant].qty
         }
+
 
     }
 })
