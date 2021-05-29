@@ -95,13 +95,14 @@ app.component('product-display', {
     },
     methods:{
         addToCart(){
+
             if(this.variants[this.selectedVariant].qty == 0){
                 this.inStock=false
                 return
             }
-            
-            this.cart +=1
-            this.variants[this.selectedVariant].qty -=1
+            this.$emit('add-to-cart' , this.variants[this.selectedVariant].id)
+
+             this.variants[this.selectedVariant].qty -=1
             if(this.variants[this.selectedVariant].qty == 0){
                 this.inStock=false
                 return
@@ -113,7 +114,8 @@ app.component('product-display', {
             if (this.cart==0){
                 return;
             }
-            this.cart -=1
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].id)
+            
             this.variants[this.selectedVariant].qty +=1
             if(this.variants[this.selectedVariant].qty>0)
             {
