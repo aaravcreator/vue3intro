@@ -37,20 +37,23 @@ app.component('product-display', {
             >Add to Cart</button>
         
             <button class="button" @click="removeFromCart">Remove</button>
-          <ul>
-            <li v-for="detail in details">- {{detail}}</li>
-          </ul>
+            
+              <!--Product Details Component -->
+            <product-details  :details="details"></product-details>
+                <!--Product Details Component -->
 
-          
-            <div   v-for ="variant, index in variants"
-              :key="variant.id" 
-              @mouseover="updateVariant(index)" 
-              @click="updateVariant(index)"
-              class="color-circle"
-              :class="{'color-circle-selected': selectedVariant == index}"
-              v-bind:style="{ backgroundColor: variant.color }"
-              >
-            </div>
+           <div>
+                <h2>Colors</h2>
+                    <div   v-for ="variant, index in variants"
+                        :key="variant.id" 
+                        @mouseover="updateVariant(index)" 
+                        @click="updateVariant(index)"
+                        class="color-circle"
+                        :class="{'color-circle-selected': selectedVariant == index}"
+                        v-bind:style="{ backgroundColor: variant.color }"
+                        >
+                    </div>
+           </div>
           
           <br>
           <h2>Sizes</h2>
