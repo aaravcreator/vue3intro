@@ -15,9 +15,9 @@ const app = Vue.createApp({
             details : ["Cotton","Soft", "For Teens","Washing Machine Friendly"],
             variants : [
                 {id:123 , color : 'green', image : "assets/images/socks_green.jpg" , qty: 18 , sale: true },
-                {id:124 , color : 'blue', image : "assets/images/socks_blue.jpg" , qty: 0 , sale: true},
-                {id:125 , color : 'white', image : "assets/images/socks_blue.jpg" , qty: 12, sale: false},
-                {id:126 , color : 'yellow', image : "assets/images/socks_green.jpg" , qty: 8, sale: true},
+                {id:124 , color : 'blue', image : "assets/images/socks_blue.jpg" , qty: 10 , sale: true},
+                {id:125 , color : 'black', image : "assets/images/socks_black.jpg" , qty: 12, sale: true},
+                {id:126 , color : 'yellow', image : "assets/images/socks_green.jpg" , qty: 0, sale: false},
             ],
             sizes : [
                 "XL","XXL","M","S"

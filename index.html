@@ -19,7 +19,7 @@
           <div class="product-container">
             <div class="product-image">
               <div class="img-holder">
-                <p class="ribbon" v-if="onSale">On Sale</p>
+                <p class="ribbon" v-if="onSale">{{title}} On Sale</p>
               <img v-bind:src="image"  :class="{'out-of-stock-img' : !inStock}" alt="">
               </div>
             </div>
