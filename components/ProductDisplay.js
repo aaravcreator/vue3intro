@@ -63,6 +63,9 @@ app.component('product-display', {
 
         </div>
       </div>
+      <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+      <product-review @form-submitted="addReview"></product-review>
+
     
     </div>
     
@@ -90,10 +93,21 @@ app.component('product-display', {
             sizes : [
                 "XL","XXL","M","S"
             ],
+            reviews : []
 
         }
     },
     methods:{
+        
+        addReview(review)
+        {
+            this.reviews.push(review)
+            console.log("review added")
+            console.log(review)
+
+        },
+
+
         addToCart(){
 
             if(this.variants[this.selectedVariant].qty == 0){
@@ -115,7 +129,7 @@ app.component('product-display', {
                 return;
             }
             this.$emit('remove-from-cart', this.variants[this.selectedVariant].id)
-            
+
             this.variants[this.selectedVariant].qty +=1
             if(this.variants[this.selectedVariant].qty>0)
             {
